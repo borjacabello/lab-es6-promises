@@ -127,6 +127,7 @@ obtainInstruction("steak", 0)
   })
   .then((step8) => {
     document.querySelector("#steak").innerHTML += `<li>${step8}</li>`;
+    document.querySelector("#steakImg").removeAttribute("hidden")
     return obtainInstruction("steak", 9);
   })
   .catch((error) => {});
@@ -151,10 +152,41 @@ async function makeBroccoli() {
     document.querySelector("#broccoli").innerHTML += `<li>${step6}</li>`;
     let step7 = await obtainInstruction("broccoli", 7);
     document.querySelector("#broccoli").innerHTML += `<li>${step7}</li>`;
+    document.querySelector("#broccoliImg").removeAttribute("hidden")
   } catch (error) {}
 }
 
 makeBroccoli();
 
+
+// Bonus 1
+// Done in the above iterations
+
+
 // Bonus 2 - Promise all
-// ...
+// brusselsSprouts.push("Brussels sprouts are ready!")  -- Also works!
+
+  Promise.allSettled([
+  obtainInstruction("brusselsSprouts", 0),
+  obtainInstruction("brusselsSprouts", 1),
+  obtainInstruction("brusselsSprouts", 2),
+  obtainInstruction("brusselsSprouts", 3),
+  obtainInstruction("brusselsSprouts", 4),
+  obtainInstruction("brusselsSprouts", 5),
+  obtainInstruction("brusselsSprouts", 6),
+  obtainInstruction("brusselsSprouts", 7),
+  obtainInstruction("brusselsSprouts", 8)
+])
+.then((promise) => {
+  document.querySelector("#brusselsSprouts").innerHTML += `<li>${promise[0].value}</li>`;
+  document.querySelector("#brusselsSprouts").innerHTML += `<li>${promise[1].value}</li>`;
+  document.querySelector("#brusselsSprouts").innerHTML += `<li>${promise[2].value}</li>`;
+  document.querySelector("#brusselsSprouts").innerHTML += `<li>${promise[3].value}</li>`;
+  document.querySelector("#brusselsSprouts").innerHTML += `<li>${promise[4].value}</li>`;
+  document.querySelector("#brusselsSprouts").innerHTML += `<li>${promise[5].value}</li>`;
+  document.querySelector("#brusselsSprouts").innerHTML += `<li>${promise[6].value}</li>`;
+  document.querySelector("#brusselsSprouts").innerHTML += `<li>${promise[7].value}</li>`;
+  document.querySelector("#brusselsSprouts").innerHTML += `<li>${promise[8].value = "Brussels sprouts are ready!"}</li>`;
+  document.querySelector("#brusselsSproutsImg").removeAttribute("hidden")
+})
+
